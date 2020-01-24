@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EnterNumber</string>
+    <string name="pin_hint">Enter 4 - 12 digit number</string>
+    <string name="compute_button">Get Block</string>
+    <string name="block_hint">PIN Block</string>
+    <string name="error_pin_wrong_size">PIN must be between 4 and 12 numbers long</string>
+</resources>
