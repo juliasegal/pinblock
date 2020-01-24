@@ -1,5 +1,6 @@
 package com.julia.apd.enternumber.ui.main
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,10 @@ class MainFragment : Fragment() {
 
         viewModel.pinBlockEntry.observe(viewLifecycleOwner, Observer {
             pin_block.text = it
+        })
+
+        viewModel.progress.observe(viewLifecycleOwner, Observer {
+            progress.visibility = if (it == true) View.VISIBLE else View.GONE
         })
 
         viewModel.errorStringRes.observe(viewLifecycleOwner, Observer {
