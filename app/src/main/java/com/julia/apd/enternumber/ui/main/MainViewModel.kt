@@ -27,7 +27,7 @@ class MainViewModel : ViewModel() {
             viewModelScope.launch {
                 _pinBlockEntry.value = withContext(Dispatchers.IO) {
                     val block = blockEncoder.encodePinBlock(pin)
-                    blockEncoder.toString(block)
+                    block.nibsToString()
                 }
             }
             progress.value = false

@@ -35,8 +35,6 @@ class MainFragment : Fragment() {
     }
 
     private fun initVM() {
-        // TODO, clear block_entry when pin_entry changes
-
         viewModel.pinBlockEntry.observe(viewLifecycleOwner, Observer {
             pin_block.text = it
         })
