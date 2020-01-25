@@ -1,6 +1,5 @@
 package com.julia.apd.enternumber.ui.main
 
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

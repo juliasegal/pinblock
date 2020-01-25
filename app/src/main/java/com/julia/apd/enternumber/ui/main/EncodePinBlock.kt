@@ -1,12 +1,13 @@
 package com.julia.apd.enternumber.ui.main
 
+import com.julia.apd.enternumber.R
 import java.lang.Exception
 import java.security.SecureRandom
 import kotlin.experimental.xor
 
-class InvalidPinExcpetion(message: String) : Exception(message)
-
 class EncodePinBlock {
+
+    class InvalidPinException(val resourceId: Int) : Exception()
 
     companion object {
         const val MIN_PIN_LENGTH = 4
@@ -19,12 +20,12 @@ class EncodePinBlock {
 
     fun encodePinBlock(pin: String): ByteArray {
         if (pin.length < MIN_PIN_LENGTH) {
-            throw InvalidPinExcpetion("PIN length too short")
+            throw InvalidPinException(R.string.error_pin_wrong_size)
         } else if (pin.length > MAX_PIN_LENGTH) {
-            throw InvalidPinExcpetion("PIN length too long")
+            throw InvalidPinException(R.string.error_pin_wrong_size)
         }
         if (!pin.contains(Regex("^[0-9]*$"))) {
-            throw InvalidPinExcpetion("PIN contains illegal characters")
+            throw InvalidPinException(R.string.error_pin_invalid_chars)
         }
 
         val preppedPIN = preparePIN(pin)

@@ -27,7 +27,7 @@ class EncodePinBlockTest {
 
     @Test
     fun encodeTooLongPinBlock() {
-        assertFailsWith<InvalidPinExcpetion> {
+        assertFailsWith<EncodePinBlock.InvalidPinException> {
             val encoder = EncodePinBlock()
             val pin = "123456789101112"
             encoder.encodePinBlock(pin)
@@ -36,7 +36,7 @@ class EncodePinBlockTest {
 
     @Test
     fun encodeTooShortPinBlock() {
-        assertFailsWith<InvalidPinExcpetion> {
+        assertFailsWith<EncodePinBlock.InvalidPinException> {
             val encoder = EncodePinBlock()
             val pin = "12"
             encoder.encodePinBlock(pin)
@@ -45,7 +45,7 @@ class EncodePinBlockTest {
 
     @Test
     fun encodeBadPinBlock() {
-        assertFailsWith<InvalidPinExcpetion> {
+        assertFailsWith<EncodePinBlock.InvalidPinException> {
             val encoder = EncodePinBlock()
             val pin = "Hello!"
             encoder.encodePinBlock(pin)

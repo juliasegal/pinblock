@@ -4,11 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.julia.apd.enternumber.R
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
 
 class MainViewModel : ViewModel() {
     private val blockEncoder by lazy { EncodePinBlock() }
@@ -20,18 +16,16 @@ class MainViewModel : ViewModel() {
     val progress = MutableLiveData<Boolean>()
 
     fun computeBlock(pin: String) {
-        if (pin.length < EncodePinBlock.MIN_PIN_LENGTH || pin.length > EncodePinBlock.MAX_PIN_LENGTH) {
-            _errorStringRes.value = R.string.error_pin_wrong_size
-        } else {
-            progress.value = true
-            viewModelScope.launch {
-                _pinBlockEntry.value = withContext(Dispatchers.IO) {
-                    val block = blockEncoder.encodePinBlock(pin)
-                    block.nibsToString()
-                }
+        progress.value = true
+        viewModelScope.launch {
+            try {
+                val block = blockEncoder.encodePinBlock(pin)
+                _pinBlockEntry.value = block.nibsToString()
+                _errorStringRes.value = 0
+            } catch (ex: EncodePinBlock.InvalidPinException) {
+                _errorStringRes.value = ex.resourceId
             }
-            progress.value = false
-            _errorStringRes.value = 0
         }
+        progress.value = false
     }
 }
