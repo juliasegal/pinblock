@@ -44,8 +44,10 @@ class MainFragment : Fragment() {
         })
 
         viewModel.errorStringRes.observe(viewLifecycleOwner, Observer {
-            Snackbar.make(main_layout, getString(it), Snackbar.LENGTH_LONG).show()
-            pin_block.text = ""
+            if (it != 0) {
+                Snackbar.make(main_layout, getString(it), Snackbar.LENGTH_LONG).show()
+                pin_block.text = ""
+            }
         })
 
         compute_button.setOnClickListener { viewModel.computeBlock(pin_entry.text.toString()) }

@@ -31,6 +31,7 @@ class MainViewModel : ViewModel() {
                 }
             }
             progress.value = false
+            _errorStringRes.value = 0
         }
     }
 }
